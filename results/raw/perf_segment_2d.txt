@@ -1,0 +1,12 @@
+# started on Fri Nov 20 14:27:26 2026
+
+
+ Performance counter stats for './build/profile_2d segment 250 250 50 100000' (5 runs):
+
+          90913465      cycles:u                                                                ( +-  3.11% )
+         116912825      instructions:u                                                          ( +-  0.00% )
+           7839828      cache-references:u                                                      ( +-  2.29% )
+            215810      cache-misses:u                                                          ( +-  9.40% )
+
+       0.026889416 +- 0.000776431 seconds time elapsed  ( +-  2.89% )
+

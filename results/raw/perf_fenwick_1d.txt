@@ -1,0 +1,12 @@
+# started on Fri Nov 20 14:17:18 2026
+
+
+ Performance counter stats for './build/profile_1d fenwick 100000 50 100000' (5 runs):
+
+          36871900      cycles:u                                                                ( +-  6.92% )
+          60645178      instructions:u                                                          ( +-  0.00% )
+           2542967      cache-references:u                                                      ( +-  8.05% )
+            177298      cache-misses:u                                                          ( +-  4.94% )
+
+       0.020057047 +- 0.003019500 seconds time elapsed  ( +- 15.05% )
+

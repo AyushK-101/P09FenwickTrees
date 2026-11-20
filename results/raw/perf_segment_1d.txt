@@ -1,0 +1,12 @@
+# started on Fri Nov 20 14:17:33 2026
+
+
+ Performance counter stats for './build/profile_1d segment 100000 50 100000' (5 runs):
+
+          47425949      cycles:u                                                                ( +-  1.65% )
+          67718859      instructions:u                                                          ( +-  0.00% )
+           1917881      cache-references:u                                                      ( +-  1.27% )
+            156483      cache-misses:u                                                          ( +- 14.96% )
+
+       0.022581920 +- 0.004547692 seconds time elapsed  ( +- 20.14% )
+

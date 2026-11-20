@@ -1,0 +1,29 @@
+# Compiled binaries
+*.exe
+*.out
+*.o
+*.a
+*.so
+
+# Build directories
+build/
+cmake-build-*/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# IDE
+.vscode/
+.idea/
+
+# Temporary files
+*.tmp
+*.log
+*.swp
+
+# OS files
+.DS_Store
+Thumbs.db

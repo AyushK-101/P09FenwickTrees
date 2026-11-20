@@ -2,6 +2,11 @@
 
 **CS G526 — Advanced Algorithms and Complexity | P09**
 
+Video: https://www.youtube.com/watch?v=FM50SLNacqw
+PPT: in ppt/ in this repo
+Report: in report/ in this repo
+Proposal: in proposal/ in this repo
+
 This project implements and evaluates Fenwick Trees (Binary Indexed Trees) and Segment Trees for dynamic sum queries in one and two dimensions. The comparison uses the same generated workloads for both structures and measures construction time, update latency, query latency, total execution time, throughput, and whole-process CPU/cache/memory behavior.
 
 The full technical report is available as `P09_Fenwick_Segment_Report_Green.pdf` (or as `report.pdf` inside the LaTeX project). It contains the explanations, implementation listings, experiment methodology, measured results, and limitations.

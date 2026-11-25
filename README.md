@@ -2,7 +2,6 @@
 
 **CS G526 — Advanced Algorithms and Complexity | P09**
 
-**Video:** https://www.youtube.com/watch?v=FM50SLNacqw  
 **Presentation:** [`ppt/`](ppt/)  
 **Technical report:** [`report/`](report/)  
 **Proposal:** [`proposal/`](proposal/)

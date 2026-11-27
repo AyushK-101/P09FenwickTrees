@@ -1017,8 +1017,6 @@ On Linux or WSL, after the build and correctness checks in Section 4.3, choose a
 python3 scripts/analyze_range_structures.py results/range_run_01
 ```
 
-### 21.2 Cache efficiency and Windows profiling
+### 21.2 Cache efficiency
 
-Sections 14–15 cover whole-process Linux hardware counters and Cachegrind simulation for the original trees. Both absolute cache misses and misses per reference matter. They can rank the same measurements differently, and process-level counts include work outside the tree operations.
-
-The extension's Windows profiling measured thread cycles for the workload replay. The Windows hardware-counter trace could not be collected because recording was denied, so there are no new Windows cache-miss or instruction counts. The [profiling notes](docs/range_hardware_profiling.md) explain the measurement and reproduction commands.
+Sections 14–15 cover whole-process Linux hardware counters and Cachegrind simulation for the original trees. Both absolute cache misses and misses per reference matter. They can rank the same measurements differently, and process-level counts include work outside the tree operations. The Windows profiling measured thread cycles for the workload replay. The [profiling notes](docs/range_hardware_profiling.md) explain the measurement and reproduction commands.

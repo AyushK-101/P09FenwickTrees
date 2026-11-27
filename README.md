@@ -980,7 +980,7 @@ Across the nine benchmark configurations in each dimension, Fenwick Trees achiev
 
 The total execution-time advantage ranged from approximately 1.82–4.17× in 1D and 1.60–3.35× in 2D.
 
-Segment Trees generally constructed faster in the main benchmarks. This reflects the construction strategies used by the tested implementations, rather than a universal advantage over all Fenwick construction methods.
+In the original point-update benchmarks, the Segment Tree had lower mean construction time than the repeated-update Fenwick Tree in 8 of 9 configurations in each dimension. In the newer 1D construction experiment, the linear-build Fenwick Tree had lower median construction time than the iterative Segment Tree at all three tested sizes.
 
 CPU and cache profiling showed differences in instruction counts, processor cycles, cache behavior, and peak process memory. These measurements help explain the observed performance differences, but profiling includes whole-process activity and does not isolate every source of overhead.
 

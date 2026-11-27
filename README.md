@@ -1,7 +1,5 @@
 # Fenwick trees versus segment trees (1D and 2D)
 
-**CS G526 — Advanced Algorithms and Complexity | P09**
-
 **Presentation:** [`ppt/`](ppt/)  
 **Technical report:** [`report/`](report/)  
 **Proposal:** [`proposal/`](proposal/)

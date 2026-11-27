@@ -98,7 +98,7 @@ The correctness tests verify outputs for the tested inputs. The benchmark progra
 
 ## 3. Requirements
 
-The original experiments use Linux or Ubuntu on WSL. The construction and range-update suite also runs natively on Windows with PowerShell and MSVC or MinGW-w64 GCC. CMake 3.20 or newer is optional for the PowerShell runner.
+The original experiments use Linux or Ubuntu on WSL. The construction and range-update suite also runs natively on Windows with PowerShell and MSVC or MinGW-w64 GCC.
 
 Required software:
 
@@ -111,18 +111,6 @@ Optional profiling tools:
 - Linux `perf`
 - Valgrind Cachegrind
 - GNU `/usr/bin/time`
-
-Optional report-building tools:
-
-- XeLaTeX
-- Fonts required by the LaTeX report
-
-Run all commands from the project root:
-
-```bash
-cd ~/projects/P09FenwickTrees
-mkdir -p build results/raw results/processed results/graphs
-```
 
 ## 4. Correctness testing
 

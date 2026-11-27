@@ -980,7 +980,9 @@ Across the nine benchmark configurations in each dimension, Fenwick Trees achiev
 
 The total execution-time advantage ranged from approximately 1.82–4.17× in 1D and 1.60–3.35× in 2D.
 
-In the original point-update benchmarks, the Segment Tree had lower mean construction time than the repeated-update Fenwick Tree in 8 of 9 configurations in each dimension. In the newer 1D construction experiment, the linear-build Fenwick Tree had lower median construction time than the iterative Segment Tree at all three tested sizes.
+In the original 1D benchmarks, the O(n) Segment Tree built faster on average than the O(n log n) Fenwick Tree (built using repeated point updates) in 8 of 9 configurations. The original 2D Segment Tree also built faster on average in 8 of 9 configurations against the 2D Fenwick Tree built using repeated point updates.
+
+In the newer 1D construction experiment, the O(n) Fenwick Tree (linear build) had the lowest median build time at all three tested sizes, followed by the O(n) Segment Tree and the O(n log n) Fenwick Tree. At one million elements, their median build times were 3.70 ms, 8.08 ms, and 14.05 ms, respectively.
 
 CPU and cache profiling showed differences in instruction counts, processor cycles, cache behavior, and peak process memory. These measurements help explain the observed performance differences, but profiling includes whole-process activity and does not isolate every source of overhead.
 
@@ -994,7 +996,7 @@ The extension uses six trials per configuration. Workload experiments use 100,00
 
 | Experiment | Implementations | Result at 1,000,000 elements |
 |---|---|---|
-| Construction | Linear Fenwick, iterative Segment Tree, repeated-update Fenwick | Median builds took 3.70 ms, 8.08 ms, and 14.05 ms, respectively |
+| Construction | O(n) Fenwick Tree, O(n) iterative Segment Tree, O(n log n) Fenwick Tree | Median builds took 3.70 ms, 8.08 ms, and 14.05 ms, respectively |
 | A. Point addition and range sum | Linear-build Fenwick and iterative Segment Tree | Median replay at 50% updates was 4.59 ms versus 14.15 ms |
 | B. Range addition and range sum | Two-BIT Fenwick and lazy Segment Tree | At 50% updates, median replay was 18.56 vs 43.95 ms for short ranges and 20.70 vs 65.87 ms for wide ranges |
 | C. Range assignment and range sum | Lazy Segment Tree | Median replay at 50% updates was 41.24 ms for short ranges and 57.17 ms for wide ranges |

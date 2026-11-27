@@ -22,6 +22,10 @@ public:
             tree[i] = tree[2 * i] + tree[2 * i + 1];
     }
 
+    size_t storageBytes() const {
+        return tree.capacity() * sizeof(long long);
+    }
+
     // Add delta to 1-based index i
     void update(int i, long long delta) {
         if (i < 1 || i > n)

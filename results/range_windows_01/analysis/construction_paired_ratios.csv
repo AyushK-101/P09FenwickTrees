@@ -1,0 +1,13 @@
+n,update_span,update_percent,baseline,comparator,metric,median,q1,q3
+10000,,0,Fenwick (linear),Segment (iterative),build_ms,1.5535265700483092,1.4623523077818519,3.863055555555555
+10000,,0,Fenwick (linear),Segment (iterative),storage_bytes,1.9998000199980002,1.9998000199980002,1.9998000199980002
+10000,,0,Fenwick (linear),Fenwick (repeated),build_ms,4.6617971887550205,1.558525405971713,7.400752801120448
+10000,,0,Fenwick (linear),Fenwick (repeated),storage_bytes,1.0,1.0,1.0
+100000,,0,Fenwick (linear),Segment (iterative),build_ms,1.4910050567357782,1.2528309772358694,1.613261973527822
+100000,,0,Fenwick (linear),Segment (iterative),storage_bytes,1.999980000199998,1.999980000199998,1.999980000199998
+100000,,0,Fenwick (linear),Fenwick (repeated),build_ms,2.1928529940196375,2.132687261365607,2.3812316570159435
+100000,,0,Fenwick (linear),Fenwick (repeated),storage_bytes,1.0,1.0,1.0
+1000000,,0,Fenwick (linear),Segment (iterative),build_ms,2.251718775412992,2.039795647819097,2.5226359385271913
+1000000,,0,Fenwick (linear),Segment (iterative),storage_bytes,1.999998000002,1.999998000002,1.999998000002
+1000000,,0,Fenwick (linear),Fenwick (repeated),build_ms,3.5751667897399724,3.518960417137614,3.9786336932099746
+1000000,,0,Fenwick (linear),Fenwick (repeated),storage_bytes,1.0,1.0,1.0

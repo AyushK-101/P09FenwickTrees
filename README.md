@@ -20,15 +20,17 @@ The complete technical report, including implementation explanations, experiment
 |---|---|---|
 | 1D Fenwick Tree | Point addition, prefix sum, range sum | Low-bit index traversal using `i & -i` |
 | 1D Fenwick variants | Linear construction, order statistics, update/query demonstrations | Bit manipulation and bit lifting |
+| 1D two-BIT Fenwick Tree | Range addition, prefix sum, range sum | Difference array and weighted prefix sums |
+| 1D lazy Segment Tree | Range addition, range assignment, range sum | Deferred addition and assignment tags |
 | 2D Fenwick Tree | Point addition, 2D prefix sum, rectangle sum | Nested low-bit traversal |
-| 1D Segment Tree | Point addition, range sum | Recursive interval decomposition |
-| 2D Segment Tree | Point addition, rectangle sum | Recursive row and column decomposition |
+| 1D Segment Tree | Point addition, range sum | Iterative array traversal |
+| 2D Segment Tree | Point addition, rectangle sum | Iterative row and column traversal |
 
 All implementations use C++17.
 
 The Fenwick implementations use array-based indexing without explicit tree pointers. The Segment Tree implementations also use array-based storage.
 
-The tested Segment Trees support sum queries and point additions. Lazy propagation, pointer-based nodes, and range-minimum/range-maximum implementations are not included.
+The standard 1D and 2D Segment Trees benchmark point additions and sum queries. The 1D lazy Segment Tree adds range addition and assignment. The 2D comparison covers point additions and rectangle sums.
 
 The order-statistic Fenwick routine assumes nonnegative frequencies.
 
@@ -79,6 +81,8 @@ The `results/graphs/` directory contains the generated benchmark figures.
 
 The `build/` directory is created locally for compiled executables and is excluded from version control.
 
+The extension adds `CMakeLists.txt`, a shared linear builder and two-BIT implementation under `src/fenwick/`, and the lazy implementation under `src/segment_tree/`. The new benchmark and test live in `benchmarks/benchmark_range_structures.cpp` and `tests/test_range_structures.cpp`. Windows tooling and analysis live under `scripts/`. The recorded extension data and graphs are in [results/range_windows_01](results/range_windows_01/).
+
 ### 2.1 Testing, benchmarking, and profiling files
 
 The following programs verify correctness, generate performance measurements, and collect hardware-level profiling data.
@@ -96,7 +100,7 @@ The correctness tests verify outputs for the tested inputs. The benchmark progra
 
 ## 3. Requirements
 
-The project was developed using Ubuntu on WSL.
+The original experiments use Linux or Ubuntu on WSL. The construction and range-update suite also runs natively on Windows with PowerShell and MSVC or MinGW-w64 GCC. CMake 3.20 or newer is optional for the PowerShell runner.
 
 Required software:
 
@@ -147,6 +151,18 @@ g++ -std=c++17 -O2 tests/test_fenwick_advanced.cpp -o build/test_fenwick_advance
 `test_fenwick_advanced.cpp` checks linear Fenwick construction and order-statistic functionality.
 
 Randomized tests exercise repeated updates and queries. A passing run establishes correctness for the tested cases, not a formal proof for every possible input.
+
+### 4.3 Construction and range correctness
+
+The third suite checks linear and repeated construction, mixed range operations, and edge cases against reference results. Run all three suites with CMake and CTest on Linux or WSL.
+
+```bash
+cmake -S . -B build/range-release -DCMAKE_BUILD_TYPE=Release
+cmake --build build/range-release --parallel
+ctest --test-dir build/range-release --output-on-failure
+```
+
+On Windows, use the same PowerShell runner described in Section 21 with the `-TestsOnly` option.
 
 ## 5. Experimental methodology
 
@@ -956,9 +972,9 @@ To open the graph folder in Windows from WSL:
 
 explorer.exe "$(wslpath -w "$PWD/results/graphs")"
 
-20. Main findings and limitations
+## 20. Main findings and limitations
 
-The tested Fenwick Tree implementations consistently outperformed the corresponding Segment Trees during dynamic sum operations.
+In the original 1D and 2D point-update benchmarks, Fenwick Trees completed the measured workloads faster than the corresponding Segment Trees.
 
 Across the nine benchmark configurations in each dimension, Fenwick Trees achieved lower measured point-update latency, query latency, and total execution time.
 
@@ -970,3 +986,39 @@ CPU and cache profiling showed differences in instruction counts, processor cycl
 
 The results are specific to the implemented algorithms, tested workloads, compiler settings, and hardware environment. They do not establish that Fenwick Trees are faster for every possible operation, implementation, or input distribution.
 
+
+
+## 21. Construction and range-update experiments
+
+The extension uses six trials per configuration. Workload experiments use 100,000 operations at 10%, 50%, and 90% updates on arrays of 10,000, 100,000, and 1,000,000 elements. Each pair uses the same input and seeded operation sequence. Construction is timed separately from replay. The results include medians, quartiles, tree storage, and paired timing ratios where applicable.
+
+| Experiment | Implementations | Result at 1,000,000 elements |
+|---|---|---|
+| Construction | Linear Fenwick, iterative Segment Tree, repeated-update Fenwick | Median builds took 3.70 ms, 8.08 ms, and 14.05 ms, respectively |
+| A. Point addition and range sum | Linear-build Fenwick and iterative Segment Tree | Median replay at 50% updates was 4.59 ms versus 14.15 ms |
+| B. Range addition and range sum | Two-BIT Fenwick and lazy Segment Tree | At 50% updates, median replay was 18.56 vs 43.95 ms for short ranges and 20.70 vs 65.87 ms for wide ranges |
+| C. Range assignment and range sum | Lazy Segment Tree | Median replay at 50% updates was 41.24 ms for short ranges and 57.17 ms for wide ranges |
+
+Experiment C measures assignment separately because overwriting an interval can require different deltas at each position. See the [methodology and commands](docs/range_update_experiments.md) and the [recorded analysis and graphs](results/range_windows_01/analysis/).
+
+### 21.1 Run the extension
+
+On Windows, run from the project root with a compiler available in your shell.
+
+```powershell
+py -m pip install matplotlib
+powershell.exe -NoProfile -ExecutionPolicy RemoteSigned -File .\scripts\run_range_experiments.ps1
+```
+
+On Linux or WSL, after the build and correctness checks in Section 4.3, choose a fresh output directory.
+
+```bash
+./build/range-release/benchmark_range_structures results/range_run_01
+python3 scripts/analyze_range_structures.py results/range_run_01
+```
+
+### 21.2 Cache efficiency and Windows profiling
+
+Sections 14–15 cover whole-process Linux hardware counters and Cachegrind simulation for the original trees. Both absolute cache misses and misses per reference matter. They can rank the same measurements differently, and process-level counts include work outside the tree operations.
+
+The extension's Windows profiling measured thread cycles for the workload replay. The Windows hardware-counter trace could not be collected because recording was denied, so there are no new Windows cache-miss or instruction counts. The [profiling notes](docs/range_hardware_profiling.md) explain the measurement and reproduction commands.

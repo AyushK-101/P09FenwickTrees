@@ -1,6 +1,7 @@
 
 #include <iostream>
 #include <vector>
+#include "linear_build.hpp"
 using namespace std;
 
 class FenwickTree {
@@ -12,15 +13,7 @@ public:
         n = arr.size();
         bit.assign(n + 1, 0);
 
-        // O(N) construction
-        for (int i = 1; i <= n; i++) {
-            bit[i] += arr[i - 1];
-
-            int parent = i + (i & -i);
-
-            if (parent <= n)
-                bit[parent] += bit[i];
-        }
+        fenwick_detail::buildLinear(bit, [&](size_t i) { return arr[i]; });
     }
 
     void display() const {

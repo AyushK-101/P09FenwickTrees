@@ -1,6 +1,7 @@
 
 #include <iostream>
 #include <vector>
+#include "linear_build.hpp"
 using namespace std;
 
 class FenwickTree {
@@ -13,6 +14,15 @@ public:
     FenwickTree(int size) {
         n = size;
         bit.assign(n + 1, 0);
+    }
+
+    explicit FenwickTree(const vector<long long>& arr)
+        : n(static_cast<int>(arr.size())), bit(arr.size() + 1, 0) {
+        fenwick_detail::buildLinear(bit, [&](size_t i) { return arr[i]; });
+    }
+
+    size_t storageBytes() const {
+        return bit.capacity() * sizeof(long long);
     }
 
     // Add delta to position i

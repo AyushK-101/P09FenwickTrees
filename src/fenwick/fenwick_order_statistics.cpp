@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include <stdexcept>
+#include "linear_build.hpp"
 using namespace std;
 
 class FenwickOrderStatistics {
@@ -19,14 +20,7 @@ public:
             if (x < 0)
                 throw invalid_argument("Values must be nonnegative");
 
-        for (int i = 1; i <= n; i++) {
-            bit[i] += arr[i - 1];
-
-            int parent = i + (i & -i);
-
-            if (parent <= n)
-                bit[parent] += bit[i];
-        }
+        fenwick_detail::buildLinear(bit, [&](size_t i) { return arr[i]; });
     }
 
     void update(int i, long long delta) {

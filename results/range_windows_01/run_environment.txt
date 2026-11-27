@@ -1,0 +1,5 @@
+Compiler: g++.exe 16.2.0
+Flags: -std=c++17 -O2
+Windows version: Microsoft Windows NT 10.0.26300.0
+Processor: Intel64 Family 6 Model 165 Stepping 2, GenuineIntel
+Run time: 2026-11-24T17:02:03.9421366+05:30

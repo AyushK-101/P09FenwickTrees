@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WindowsPerformanceRecorder Version="1.0" Author="P09">
+  <Profiles>
+    <SystemCollector Id="Collector" Name="P09 range replay">
+      <BufferSize Value="128"/>
+      <Buffers Value="64"/>
+    </SystemCollector>
+    <SystemProvider Id="SystemProvider">
+      <Keywords>
+        <Keyword Value="ProcessThread"/>
+        <Keyword Value="Loader"/>
+        <Keyword Value="CSwitch"/>
+      </Keywords>
+    </SystemProvider>
+    <HardwareCounter Id="Counters" Strict="true">
+      <Counters>
+        <Counter Value="InstructionRetired"/>
+        <Counter Value="TotalCycles"/>
+        <Counter Value="LLCMisses"/>
+      </Counters>
+      <Events><Event Value="CSwitch"/></Events>
+    </HardwareCounter>
+    <Profile Id="P09.Light.File" Name="P09" Description="P09 per-process hardware counters" LoggingMode="File" DetailLevel="Light">
+      <Collectors>
+        <SystemCollectorId Value="Collector">
+          <SystemProviderId Value="SystemProvider"/>
+          <HardwareCounterId Value="Counters"/>
+        </SystemCollectorId>
+      </Collectors>
+    </Profile>
+  </Profiles>
+</WindowsPerformanceRecorder>
